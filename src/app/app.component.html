@@ -5,23 +5,19 @@
   <div id="main-content" class="container">
 
     <div class="row">
-      <div class="col-md-12">
-        {{ greeting }}
-      </div>
-    </div>
-
-    <div class="row">
       <div class="col-md-6">
         <form class="form-inline">
           <div class="form-group">
             <label for="connect">WebSocket connection:</label>
-            <button (click)="connect()" class="btn btn-default" type="submit">Connect</button>
-            <button (click)="disconnect()" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-            </button>
+            <button [disabled]="stompClient" (click)="connect()" class="btn btn-default" type="submit">Connect</button>
+            <button [disabled]="!stompClient" (click)="disconnect()" class="btn btn-default"
+              type="submit">Disconnect</button>
+            <button [disabled]="!stompClient" (click)="sendMessage()" class="btn btn-default"
+              type="submit">Send</button>
           </div>
         </form>
       </div>
-      <div class="col-md-6">
+      <!-- <div class="col-md-6">
         <form class="form-inline">
           <div class="form-group">
             <label for="name">What is your name?</label>
@@ -29,9 +25,13 @@
           </div>
           <button (click)="sendMessage()" class="btn btn-default" type="submit">Send</button>
         </form>
-      </div>
+      </div> -->
 
-      <p> {{ greeting }}</p>
+      <div class="row">
+        <div class="col-md-12">
+          <pre>{{ response | json }}</pre>
+        </div>
+      </div>
     </div>
 
   </div>
